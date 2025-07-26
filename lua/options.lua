@@ -98,6 +98,15 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
 })
 
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("highlight InvalidChar ctermbg=red guibg=red")
+    vim.cmd("match InvalidChar /[^\\x00-\\x7F]/")
+  end,
+})
+
+
 -- Reference: https://jdhao.github.io/2019/04/29/nvim_spell_check/
 
 -- Enable spell check and set languages
